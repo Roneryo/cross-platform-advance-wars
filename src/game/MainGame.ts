@@ -1,42 +1,39 @@
 import Phaser from "phaser";
-import { SceneA } from "./scenes/sample-a";
-import { SceneB } from "./scenes/sample-b";
-import { SceneC } from "./scenes/sample-c";
+// import { SceneA } from "./scenes/sample-a";
+// import { SceneB } from "./scenes/sample-b";
+// import { SceneC } from "./scenes/sample-c";
 import { MenuScene } from "./scenes/menu-scene";
 
-
 const GameConfig: Phaser.Types.Core.GameConfig = {
-  title: 'ExampleGame',
+  title: "ExampleGame",
   width: 800,
   height: 600,
   type: Phaser.AUTO,
-  parent: 'app',
+  parent: "app",
   transparent: false,
   scene: [MenuScene],
   input: {
-    keyboard: true
+    keyboard: true,
   },
   physics: {
-    default: 'arcade',
+    default: "arcade",
     arcade: {
       gravity: { y: 0 },
-      debug: true
-    }
+      debug: true,
+    },
   },
-  backgroundColor: '#392542',
+  backgroundColor: "#392542",
   render: { pixelArt: true, antialias: false },
   scale: {
     mode: Phaser.Scale.ScaleModes.RESIZE,
     autoCenter: Phaser.Scale.NO_CENTER,
-    
+
     // `fullscreenTarget` must be defined for phones to not have
     // a small margin during fullscreen.
-    fullscreenTarget: 'app',
+    fullscreenTarget: "app",
     expandParent: false,
   },
-  
 };
-
 
 export class Game extends Phaser.Game {
   constructor(config: Phaser.Types.Core.GameConfig) {
@@ -44,10 +41,10 @@ export class Game extends Phaser.Game {
   }
 }
 
-let game = ()=>{
-  window.addEventListener('load', () => {
+let game = () => {
+  window.addEventListener("load", () => {
     // Expose `_game` to allow debugging, mute button and fullscreen button
     (window as any)._game = new Game(GameConfig);
   });
-} 
-export default game ;
+};
+export default game;

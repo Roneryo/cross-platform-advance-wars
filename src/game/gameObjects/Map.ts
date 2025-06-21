@@ -20,7 +20,12 @@ export class Map extends Phaser.Tilemaps.MapData {
       { name: "idleRed-tiles", image: "IdleRed.png" },
       { name: "animated", image: "AnimatedUnits.png" },
     ];
-    this.spriteSheet = [{ name: "animatedUnits", image: "AnimatedUnits.png" }];
+    this.spriteSheet = [];
+    this.spriteSheet.push({
+      name: "animatedUnits",
+      image: "AnimatedUnits.png",
+    });
+    this.spriteSheet.push({ name: "IdleRed", image: "IdleRed.png" });
   }
   public init(): void {
     this.tilemapKey = "game/assets/tilemaps/customMap.json";
@@ -38,7 +43,7 @@ export class Map extends Phaser.Tilemaps.MapData {
       scene.load.spritesheet(
         spriteURL.name,
         `${this.tilesetKey}${spriteURL.image}`,
-        { frameWidth: 24, frameHeight: 24 }
+        { frameWidth: 16, frameHeight: 16 }
       );
     });
   }
@@ -64,6 +69,15 @@ export class Map extends Phaser.Tilemaps.MapData {
       }),
       repeat: -1,
     });
+    scene.anims.create({
+      key: "idle",
+      frameRate: 4,
+      frames: scene.anims.generateFrameNumbers("IdleRed", {
+        start: 0,
+        end: 2,
+      }),
+      repeat: -1,
+    });
   }
   createLevelWithTileMap(scene: Phaser.Scene): void {
     this.createSpriteAnimations(scene);
@@ -77,19 +91,12 @@ export class Map extends Phaser.Tilemaps.MapData {
       "MAR2",
       "sea-tiles"
     );
-    const idleSprites_tilesets: Phaser.Tilemaps.Tileset =
-      this.grid.addTilesetImage("IdleRed", "idleRed-tiles");
+    this.grid.addTilesetImage("IdleRed", "idleRed-tiles");
 
     const layers = this.grid.layers; // this.grid es tu Tilemap
     layers.forEach((layer, index) => {
       console.log(`Layer ID: ${index}, Layer Name: ${layer.name}`);
     });
-    // const ground = this.grid.createLayer(0, dessert_tilesets, 0, 0);
-    // const sea = this.grid.createLayer(4, sea_tilesets, 0, 0);
-    // const tree = this.grid.createLayer(1, dessert_tilesets, 0, 0);
-    // const mountain = this.grid.createLayer(2, dessert_tilesets, 0, 0);
-    // const mountain2 = this.grid.createLayer(3, dessert_tilesets, 0, 0);
-    // const idleSprites = this.grid.createLayer(5, idleSprites_tilesets, 0, 0);
 
     const Sand = this.grid.createLayer(0, dessert_tilesets, 0, 0);
     const pipetrail = this.grid.createLayer(1, dessert_tilesets, 0, 0);
