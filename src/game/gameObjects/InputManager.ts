@@ -3,7 +3,7 @@ import { MenuScene } from "../scenes/menu-scene";
 import { cursorPosition } from "./Periferics/MouseEvents";
 import calculateGridPosition from "../utils/Map/grid";
 // import { calculateGridPosition } from "./Periferics/KeyboardEvents";
-
+let u_exist = false;
 export default function inputHandler(scene: MenuScene): void {
   scene.input.keyboard.addKeys("UP,DOWN,RIGHT,LEFT");
   scene.input.keyboard.on("keydown-A", () => {
@@ -38,29 +38,34 @@ export default function inputHandler(scene: MenuScene): void {
     if (e.button === 0) {
       let { x, y } = e.position;
       let { gridMoveX, gridMoveY } = calculateGridPosition(x, y);
-      // let tile = scene.data;
-      // console.log(tile);
-      // console.log(scene)
-      // console.log(tile.setFlipX(!tile.flipX))
-      // console.log(gridMoveX, gridMoveY);
+      let unit_x = gridMoveX * 32 + 16;
+      let unit_y = gridMoveY * 32 + 16;
 
-      let unit = scene.add.sprite(
-        gridMoveX * 32 + 12,
-        gridMoveY * 32 + 12,
-        "idle"
-      );
-      unit.setScale(2);
-      unit.play("idle");
-      scene.units.push(unit);
-      console.log(scene.units);
-      // aTile.alpha===1 ? aTile.alpha=0 : aTile.alpha=1
-      // console.log(copyTile)
-      // let text = this.make.text({ text: "hola mundo", x: gridMoveX, y: gridMoveY, style: { color: "black" } });
-      // let sprite = this.make.tilemap({key:"map",width:48,height:432,tileWidth:16,tileHeight:16})
-      //this.make.tileSprite({ x: gridMoveX+13, y: gridMoveY+13, key: "idleRed-tiles", width: 16, height: 16 }, true)
+      console.log(unit_x, unit_y);
+      if (!u_exist) {
+        let unit = scene.add.sprite(unit_x, unit_y, "idle");
+        unit.setScale(2);
+        unit.play("idle");
+        scene.units.push(unit);
+        console.log("Unit created at position:", unit_x, unit_y);
+        u_exist = true;
+      }
     }
   });
   scene.input.on("pointermove", (e: any) => {
     cursorPosition(e, scene.sprite);
+    let { x, y } = e.position;
+    let { gridMoveX, gridMoveY } = calculateGridPosition(x, y);
+    let unit_x = gridMoveX * 32 + 16;
+    let unit_y = gridMoveY * 32 + 16;
+
+    scene.units.forEach((unit: Phaser.GameObjects.Sprite) => {
+      if (unit.x === unit_x && unit.y === unit_y) {
+        console.log("Unit already exists at this position");
+        u_exist = true;
+      } else {
+        u_exist = false;
+      }
+    });
   });
 }

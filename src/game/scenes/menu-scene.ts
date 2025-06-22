@@ -1,14 +1,10 @@
 import { GameObjects } from "phaser";
-
+import { createLevelWithTileMap } from "../utils/Map/draw";
 // Constants for grid and tile dimensions
-const TILE_SIZE = 32;
-const GRID_WIDTH = 30;
-const GRID_HEIGHT = 20;
-const GRID_CENTER_X = TILE_SIZE * (GRID_WIDTH / 2);
-const GRID_CENTER_Y = TILE_SIZE * (GRID_HEIGHT / 2);
 
 import { Map } from "../gameObjects/Map.ts";
 import inputHandler from "../gameObjects/InputManager.ts";
+import { setLimiter } from "../utils/Map/grid.ts";
 export class MenuScene extends Phaser.Scene {
   public map: Map;
   public character: Phaser.Tilemaps.Tile;
@@ -33,24 +29,12 @@ export class MenuScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", this.map.tilemapKey);
   }
   create(): void {
-    this.map.createLevelWithTileMap(this);
+    createLevelWithTileMap(this, this.map);
     this.character = this.map.animatedTiles[0].tile;
     console.log(this.map.grid);
     console.log(this.character.x, this.character.y);
     inputHandler(this);
-    this.grid = this.add.grid(
-      GRID_CENTER_X, // grid center x
-      GRID_CENTER_Y, // grid center y
-      TILE_SIZE * GRID_WIDTH, // grid width
-      TILE_SIZE * GRID_HEIGHT, // grid height
-      TILE_SIZE, // cell width
-      TILE_SIZE, // cell height
-      0, // fill color
-      0, // fill alpha
-      100, // outline color
-      1 // outline alpha
-    );
-    this.grid.setScale(1);
+    this.grid = setLimiter(this.grid, this);
   }
   update(time: number, delta: number): void {
     this.map.update(time, delta);
