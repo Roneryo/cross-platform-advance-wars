@@ -1,10 +1,12 @@
 import calculateGridPosition from "../../utils/Map/grid";
+import { playSFX } from "../../utils/Music/sfx";
 /*custom methods*/
 let prevx = 0;
 let prevy = 0;
 export function cursorPosition(
   { x, y }: Phaser.Input.Pointer,
-  sprite: Phaser.Tilemaps.Tilemap
+  sprite: Phaser.Tilemaps.Tilemap,
+  scene: Phaser.Scene
 ): void {
   let { gridMoveX, gridMoveY } = calculateGridPosition(x, y);
 
@@ -13,7 +15,15 @@ export function cursorPosition(
       return;
     } else {
       console.log(`gridMoveX:${gridMoveX}, gridMoveY:${gridMoveY}`);
+      playSFX(scene, "cursor_sfx", {
+        volume: 0.1,
+        rate: 1.0, // Velocidad de reproducción
+        detune: 0, // Afinación
+        loop: false, // Para efectos
+        delay: 0, // Retraso en milisegundos
+      });
     }
+
     prevy = gridMoveY;
     prevx = gridMoveX;
 

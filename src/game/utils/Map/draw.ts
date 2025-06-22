@@ -60,7 +60,7 @@ export function preloadMap(map: Map, scene: Phaser.Scene): void {
  * @param map - The custom Map object containing tilemap data and utility methods.
  *
  * @remarks
- * - Assumes that the tilemap and tileset assets ("map", "DESSERT2", "MAR2", etc.) are preloaded.
+ * - Assumes that the tilemap and tileset assets ("map", "DESSERT2", "MAR2", etc. are preloaded.
  * - The function creates multiple layers (Sand, pipetrail, Trees, Above, Below, Sea, World)
  *   and scales them by a factor of 2.
  * - Tile animations are initialized for both dessert and sea tilesets.

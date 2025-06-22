@@ -4,8 +4,42 @@ import { cursorPosition } from "./Periferics/MouseEvents";
 import calculateGridPosition from "../utils/Map/grid";
 // import { calculateGridPosition } from "./Periferics/KeyboardEvents";
 let u_exist = false;
+
+// Función para cambiar de escena
+export function changeScene(scene: Phaser.Scene, targetSceneKey: string): void {
+  console.log(`Cambiando a escena: ${targetSceneKey}`);
+  scene.scene.start(targetSceneKey);
+}
+
+// Función para agregar controles de navegación a cualquier escena
+export function addSceneNavigationControls(scene: Phaser.Scene): void {
+  scene.input.keyboard.on("keydown-ONE", () => {
+    console.log("Tecla 1 presionada - Cambiando a SceneA");
+    changeScene(scene, "SceneA");
+  });
+
+  scene.input.keyboard.on("keydown-TWO", () => {
+    console.log("Tecla 2 presionada - Cambiando a SceneB");
+    changeScene(scene, "SceneB");
+  });
+
+  scene.input.keyboard.on("keydown-THREE", () => {
+    console.log("Tecla 3 presionada - Cambiando a SceneC");
+    changeScene(scene, "SceneC");
+  });
+
+  scene.input.keyboard.on("keydown-ESC", () => {
+    console.log("Tecla ESC presionada - Volviendo al menú");
+    changeScene(scene, "MenuScene");
+  });
+}
+
 export default function inputHandler(scene: MenuScene): void {
   scene.input.keyboard.addKeys("UP,DOWN,RIGHT,LEFT");
+
+  // Controles de cambio de escena
+  addSceneNavigationControls(scene);
+
   scene.input.keyboard.on("keydown-A", () => {
     console.log("A presionado");
   });
@@ -27,13 +61,10 @@ export default function inputHandler(scene: MenuScene): void {
   });
   scene.input.on("pointerdown", (e: any) => {
     if (e.button === 0) {
-      // let { x, y } = e.position;
-      // let { gridMoveX, gridMoveY } = this.calculateGridPosition(x, y)
-      // console.log("left clickdown", e);
-      // console.log(this);
-      // let copyTile = this.map.grid.copy(7, 9, 1, 1, gridMoveX, gridMoveY, undefined, "World");
+      console.log("left clickdown", e);
     }
   });
+
   scene.input.on("pointerup", (e: Phaser.Input.Pointer) => {
     if (e.button === 0) {
       let { x, y } = e.position;
@@ -53,7 +84,7 @@ export default function inputHandler(scene: MenuScene): void {
     }
   });
   scene.input.on("pointermove", (e: any) => {
-    cursorPosition(e, scene.sprite);
+    cursorPosition(e, scene.sprite, scene);
     let { x, y } = e.position;
     let { gridMoveX, gridMoveY } = calculateGridPosition(x, y);
     let unit_x = gridMoveX * 32 + 16;
