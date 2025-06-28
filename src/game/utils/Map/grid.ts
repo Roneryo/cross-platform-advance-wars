@@ -37,3 +37,38 @@ export function setLimiter(
   );
   return grid.setScale(1);
 }
+
+export function drawCursor(scene: Scene, x: number, y: number): void {
+  cursorPosition(scene, x, y);
+}
+
+function cursorPosition(scene: Scene, x: number, y: number): void {
+  let lld_cord = y + 20;
+
+  //left_line_cord
+  let ll_cord = x - 16;
+  let rl_cord = x + 16;
+  // ╔╗
+  // ╚╝
+  //----right lines
+
+  // //----left lines
+  // ╔
+  let v_l_line_down = scene.add.line(ll_cord, y, 0, -6, 0, 1, 0x00000, 1);
+  let h_r_line_down = scene.add.line(rl_cord, y + 15, 0, 0, -6, 1, 0x00000, 1);
+
+  // ╚
+  let v_l_line_up = scene.add.line(ll_cord, lld_cord, 0, -6, 0, 1, 0x00000, 1);
+  let h_r_line_up = scene.add.line(rl_cord, y - 15, 0, 0, -6, 1, 0x00000, 1);
+
+  // ╝
+  let v_line_down = scene.add.line(rl_cord, lld_cord, 0, -6, 0, 1, 0x00000, 1);
+  let h_l_line_down = scene.add.line(x - 8, y - 15, 0, 0, -6, 1, 0x00000, 1);
+
+  // ╗
+  let v_right_line_up = scene.add.line(rl_cord, y, 0, -6, 0, 1, 0x00000, 1);
+  let h_l_line_up = scene.add.line(x - 8, y + 15, 0, 0, -6, 1, 0x00000, 1);
+
+  // let h_l_line_down = scene.add.line(x - 16, y + 15, 0, 0, -6, 0, 0x00000, 1);
+  // let h_l_line_up = scene.add.line(x - 16, y - 15, 0, 0, -6, 0, 0x00000, 1);
+}

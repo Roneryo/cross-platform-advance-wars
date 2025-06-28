@@ -1,7 +1,7 @@
 import { MenuScene } from "../scenes/menu-scene";
 
 import { cursorPosition } from "./Periferics/MouseEvents";
-import calculateGridPosition from "../utils/Map/grid";
+import calculateGridPosition, { drawCursor } from "../utils/Map/grid";
 // import { calculateGridPosition } from "./Periferics/KeyboardEvents";
 let u_exist = false;
 
@@ -89,6 +89,8 @@ export default function inputHandler(scene: MenuScene): void {
     let { gridMoveX, gridMoveY } = calculateGridPosition(x, y);
     let unit_x = gridMoveX * 32 + 16;
     let unit_y = gridMoveY * 32 + 16;
+
+    drawCursor(scene, unit_x, unit_y);
 
     scene.units.forEach((unit: Phaser.GameObjects.Sprite) => {
       if (unit.x === unit_x && unit.y === unit_y) {

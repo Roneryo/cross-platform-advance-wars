@@ -50,34 +50,7 @@ export class MenuScene extends Phaser.Scene {
     this.grid = setLimiter(this.grid, this);
     keyboardEvents(this);
     setGlobalVolume(this, 0.7);
-
-    // Agregar texto de instrucciones para navegación
-    this.add.text(10, 10, "Controles de navegación:", {
-      font: "18px Arial",
-      color: "#000000",
-      backgroundColor: "#ffffff",
-      padding: { x: 10, y: 5 },
-    });
-
-    this.add.text(10, 40, "Tecla 1: Ir a SceneA", {
-      font: "14px Arial",
-      color: "#000000",
-    });
-
-    this.add.text(10, 60, "Tecla 2: Ir a SceneB", {
-      font: "14px Arial",
-      color: "#000000",
-    });
-
-    this.add.text(10, 80, "Tecla 3: Ir a SceneC", {
-      font: "14px Arial",
-      color: "#000000",
-    });
-
-    this.add.text(10, 100, "ESC: Volver al menú (desde otras escenas)", {
-      font: "14px Arial",
-      color: "#000000",
-    });
+    addSceneNavigationControls(this);
   }
   update(time: number, delta: number): void {
     this.map.update(time, delta);
@@ -91,4 +64,22 @@ export class MenuScene extends Phaser.Scene {
     // Ejemplo: Reproducir sonido al hacer clic con volumen reducido
     playSFXWithVolume(this, "cursor_sfx", 0.5);
   }
+}
+
+function addSceneNavigationControls(scene: Phaser.Scene): void {
+  scene.input.keyboard.on("keydown-ESC", () => {
+    scene.scene.start("MenuScene");
+  });
+
+  scene.input.keyboard.on("keydown-ONE", () => {
+    scene.scene.start("SceneA");
+  });
+
+  scene.input.keyboard.on("keydown-TWO", () => {
+    scene.scene.start("SceneB");
+  });
+
+  scene.input.keyboard.on("keydown-THREE", () => {
+    scene.scene.start("SceneC");
+  });
 }
