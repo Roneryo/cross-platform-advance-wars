@@ -38,12 +38,18 @@ export function setLimiter(
   return grid.setScale(1);
 }
 
-export function drawCursor(scene: Scene, x: number, y: number): void {
-  cursorPosition(scene, x, y);
+export function drawCursor(scene: Scene, x: number, y: number): Object {
+  return squareCursorPosition(scene, x, y);
 }
 
-function cursorPosition(scene: Scene, x: number, y: number): void {
-  let lld_cord = y + 20;
+function squareCursorPosition(scene: Scene, x: number, y: number): Object {
+  scene.children.list.forEach((obj) => {
+    if (obj instanceof Phaser.GameObjects.Line) {
+      obj.destroy();
+    }
+  });
+
+  let lld_cord = y + 16; //left_line_down_cord
 
   //left_line_cord
   let ll_cord = x - 16;
@@ -54,21 +60,35 @@ function cursorPosition(scene: Scene, x: number, y: number): void {
 
   // //----left lines
   // ╔
-  let v_l_line_down = scene.add.line(ll_cord, y, 0, -6, 0, 1, 0x00000, 1);
-  let h_r_line_down = scene.add.line(rl_cord, y + 15, 0, 0, -6, 1, 0x00000, 1);
+  let v_l_line_down = scene.add.line(ll_cord, y, 0, -6, 0, 0, 0x00000, 1);
+  let h_l_line_down = scene.add.line(x, y - 16, 0, 0, -6, 0, 0x00000, 1);
 
   // ╚
-  let v_l_line_up = scene.add.line(ll_cord, lld_cord, 0, -6, 0, 1, 0x00000, 1);
-  let h_r_line_up = scene.add.line(rl_cord, y - 15, 0, 0, -6, 1, 0x00000, 1);
+  let v_l_line_up = scene.add.line(ll_cord, lld_cord, 0, -6, 0, 0, 0x00000, 1);
+  let h_l_line_up = scene.add.line(x, y + 16, 0, 0, -6, 0, 0x00000, 1);
 
-  // ╝
-  let v_line_down = scene.add.line(rl_cord, lld_cord, 0, -6, 0, 1, 0x00000, 1);
-  let h_l_line_down = scene.add.line(x - 8, y - 15, 0, 0, -6, 1, 0x00000, 1);
+  // // ╝
+  let v_line_down = scene.add.line(rl_cord, lld_cord, 0, -6, 0, 0, 0x00000, 1);
+  let h_r_line_down = scene.add.line(rl_cord, y + 16, 0, 0, -6, 0, 0x00000, 1);
 
-  // ╗
-  let v_right_line_up = scene.add.line(rl_cord, y, 0, -6, 0, 1, 0x00000, 1);
-  let h_l_line_up = scene.add.line(x - 8, y + 15, 0, 0, -6, 1, 0x00000, 1);
+  // // ╗
+  let v_right_line_up = scene.add.line(rl_cord, y, 0, -6, 0, 0, 0x00000, 1);
+  let h_r_line_up = scene.add.line(rl_cord, y - 16, 0, 0, -6, 0, 0x00000, 1);
 
-  // let h_l_line_down = scene.add.line(x - 16, y + 15, 0, 0, -6, 0, 0x00000, 1);
-  // let h_l_line_up = scene.add.line(x - 16, y - 15, 0, 0, -6, 0, 0x00000, 1);
+  // v_l_line_down,h_l_line_down,v_l_line_up,h_l_line_up,v_line_down,h_r_line_down
+
+  let cursor = {
+    l_s_line: [v_l_line_down, h_l_line_down, v_l_line_up, h_l_line_up],
+    r_s_line: [v_line_down, h_r_line_down, v_right_line_up, h_r_line_up],
+  };
+  console.log(
+    (v_l_line_down.x, v_l_line_down.y),
+    (h_l_line_down.x, h_l_line_down.y),
+    (v_l_line_up.x, v_l_line_up.y),
+    (h_l_line_up.x, h_l_line_up.y),
+    (v_line_down.x, v_line_down.y),
+    (h_r_line_down.x, h_r_line_down.y)
+  );
+  // console.log("Cursor created at position:", x, y);
+  return cursor;
 }

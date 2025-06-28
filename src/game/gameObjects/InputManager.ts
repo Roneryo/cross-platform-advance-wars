@@ -4,7 +4,6 @@ import { cursorPosition } from "./Periferics/MouseEvents";
 import calculateGridPosition, { drawCursor } from "../utils/Map/grid";
 // import { calculateGridPosition } from "./Periferics/KeyboardEvents";
 let u_exist = false;
-
 // Función para cambiar de escena
 export function changeScene(scene: Phaser.Scene, targetSceneKey: string): void {
   console.log(`Cambiando a escena: ${targetSceneKey}`);
