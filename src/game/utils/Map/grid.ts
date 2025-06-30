@@ -60,20 +60,20 @@ function squareCursorPosition(scene: Scene, x: number, y: number): Object {
 
   // //----left lines
   // ╔
-  let v_l_line_down = scene.add.line(ll_cord, y, 0, -6, 0, 0, 0x00000, 1);
-  let h_l_line_down = scene.add.line(x, y - 16, 0, 0, -6, 0, 0x00000, 1);
+  let v_l_line_down = scene.add.line(ll_cord, y, 0, -8, 0, 0, 0x00000, 1);
+  let h_l_line_down = scene.add.line(x, y - 15, 0, 0, -8, 0, 0x00000, 1);
 
   // ╚
-  let v_l_line_up = scene.add.line(ll_cord, lld_cord, 0, -6, 0, 0, 0x00000, 1);
-  let h_l_line_up = scene.add.line(x, y + 16, 0, 0, -6, 0, 0x00000, 1);
+  let v_l_line_up = scene.add.line(ll_cord, lld_cord, 0, -8, 0, 0, 0x00000, 1);
+  let h_l_line_up = scene.add.line(x, y + 15, 0, 0, -8, 0, 0x00000, 1);
 
   // // ╝
-  let v_line_down = scene.add.line(rl_cord, lld_cord, 0, -6, 0, 0, 0x00000, 1);
-  let h_r_line_down = scene.add.line(rl_cord, y + 16, 0, 0, -6, 0, 0x00000, 1);
+  let v_line_down = scene.add.line(rl_cord, lld_cord, 0, -8, 0, 0, 0x00000, 1);
+  let h_r_line_down = scene.add.line(rl_cord, y + 15, 0, 0, -8, 0, 0x00000, 1);
 
   // // ╗
-  let v_right_line_up = scene.add.line(rl_cord, y, 0, -6, 0, 0, 0x00000, 1);
-  let h_r_line_up = scene.add.line(rl_cord, y - 16, 0, 0, -6, 0, 0x00000, 1);
+  let v_right_line_up = scene.add.line(rl_cord, y, 0, -8, 0, 0, 0x00000, 1);
+  let h_r_line_up = scene.add.line(rl_cord, y - 15, 0, 0, -8, 0, 0x00000, 1);
 
   // v_l_line_down,h_l_line_down,v_l_line_up,h_l_line_up,v_line_down,h_r_line_down
 
@@ -81,7 +81,14 @@ function squareCursorPosition(scene: Scene, x: number, y: number): Object {
     l_s_line: [v_l_line_down, h_l_line_down, v_l_line_up, h_l_line_up],
     r_s_line: [v_line_down, h_r_line_down, v_right_line_up, h_r_line_up],
   };
-  console.log((v_l_line_down.x, v_l_line_down.y),(h_l_line_down.x, h_l_line_down.y),(v_l_line_up.x, v_l_line_up.y),(h_l_line_up.x, h_l_line_up.y),(v_line_down.x, v_line_down.y),(h_r_line_down.x, h_r_line_down.y));
+  console.log(
+    (v_l_line_down.x, v_l_line_down.y),
+    (h_l_line_down.x, h_l_line_down.y),
+    (v_l_line_up.x, v_l_line_up.y),
+    (h_l_line_up.x, h_l_line_up.y),
+    (v_line_down.x, v_line_down.y),
+    (h_r_line_down.x, h_r_line_down.y)
+  );
   // console.log("Cursor created at position:", x, y);
   return cursor;
 }
