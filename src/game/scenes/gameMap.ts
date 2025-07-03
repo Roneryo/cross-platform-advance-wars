@@ -1,5 +1,5 @@
 import { GameObjects } from "phaser";
-import { createLevelWithTileMap } from "../utils/Map/draw";
+import { createLevelWithTileMap } from "../utils/Map/draw.ts";
 // Constants for grid and tile dimensions
 
 import { Map } from "../gameObjects/Map.ts";

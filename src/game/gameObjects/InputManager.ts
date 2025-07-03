@@ -1,4 +1,4 @@
-import { GameMap } from "../scenes/menu-scene";
+import { GameMap } from "../scenes/gameMap";
 
 import { cursorPosition } from "./Periferics/MouseEvents";
 import calculateGridPosition, { drawCursor } from "../utils/Map/grid";
