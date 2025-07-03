@@ -15,7 +15,7 @@ import {
   //  unmuteAll,
 } from "../utils/Music/sfx.ts";
 import { keyboardEvents } from "../gameObjects/Periferics/KeyboardEvents.ts";
-export class MenuScene extends Phaser.Scene {
+export class GameMap extends Phaser.Scene {
   public map: Map;
   public character: Phaser.Tilemaps.Tile;
   public tile: any;
@@ -25,7 +25,7 @@ export class MenuScene extends Phaser.Scene {
   public units: GameObjects.Sprite[];
   constructor() {
     super({
-      key: "MenuScene",
+      key: "GameMap",
     });
     this.map = new Map();
   }
@@ -68,7 +68,7 @@ export class MenuScene extends Phaser.Scene {
 
 function addSceneNavigationControls(scene: Phaser.Scene): void {
   scene.input.keyboard.on("keydown-ESC", () => {
-    scene.scene.start("MenuScene");
+    scene.scene.start("GameMap");
   });
 
   scene.input.keyboard.on("keydown-ONE", () => {

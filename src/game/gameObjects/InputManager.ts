@@ -1,4 +1,4 @@
-import { MenuScene } from "../scenes/menu-scene";
+import { GameMap } from "../scenes/menu-scene";
 
 import { cursorPosition } from "./Periferics/MouseEvents";
 import calculateGridPosition, { drawCursor } from "../utils/Map/grid";
@@ -29,11 +29,11 @@ export function addSceneNavigationControls(scene: Phaser.Scene): void {
 
   scene.input.keyboard.on("keydown-ESC", () => {
     console.log("Tecla ESC presionada - Volviendo al menú");
-    changeScene(scene, "MenuScene");
+    changeScene(scene, "GameMap");
   });
 }
 
-export default function inputHandler(scene: MenuScene): void {
+export default function inputHandler(scene: GameMap): void {
   scene.input.keyboard.addKeys("UP,DOWN,RIGHT,LEFT");
 
   // Controles de cambio de escena
