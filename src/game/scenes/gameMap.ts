@@ -14,7 +14,6 @@ import {
   //  muteAll,
   //  unmuteAll,
 } from "../utils/Music/sfx.ts";
-import { keyboardEvents } from "../gameObjects/Periferics/KeyboardEvents.ts";
 export class GameMap extends Phaser.Scene {
   public map: Map;
   public character: Phaser.Tilemaps.Tile;
@@ -48,7 +47,6 @@ export class GameMap extends Phaser.Scene {
     console.log(this.character.x, this.character.y);
     inputHandler(this);
     this.grid = setLimiter(this.grid, this);
-    keyboardEvents(this);
     setGlobalVolume(this, 0.7);
     addSceneNavigationControls(this);
   }

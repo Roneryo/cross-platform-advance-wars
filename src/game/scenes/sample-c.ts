@@ -1,4 +1,4 @@
-import { addSceneNavigationControls } from "../gameObjects/InputManager";
+import addSceneNavigationControls from "../gameObjects/Periferics/KeyboardEvents";
 
 export class SceneC extends Phaser.Scene {
   constructor() {

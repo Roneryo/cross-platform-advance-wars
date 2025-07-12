@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { SceneA } from "./scenes/sample-a";
+import { MenuScene } from "./scenes/MenuScene";
 import { SceneB } from "./scenes/sample-b";
 import { SceneC } from "./scenes/sample-c";
 import { GameMap } from "./scenes/gameMap";
@@ -11,7 +11,7 @@ const GameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: "app",
   transparent: false,
-  scene: [GameMap, SceneA, SceneB, SceneC],
+  scene: [GameMap, MenuScene, SceneB, SceneC],
   input: {
     keyboard: true,
   },
